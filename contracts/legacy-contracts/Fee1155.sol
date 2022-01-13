@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity 0.7.6;
+pragma solidity ^0.8.8;
 pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 import "./FeeOwner.sol";
 
@@ -47,7 +47,7 @@ contract Fee1155 is ERC1155, Ownable {
   address public proxyRegistryAddress;
 
   /// @dev A mask for isolating an item's group ID.
-  uint256 constant GROUP_MASK = uint256(uint128(~0)) << 128;
+  uint256 constant GROUP_MASK = type(uint128).max << 128;
 
   /// A counter to enforce unique IDs for each item group minted.
   uint256 public nextItemGroupId;

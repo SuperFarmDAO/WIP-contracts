@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity 0.7.6;
+pragma solidity ^0.8.8;
 pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 import "./FeeOwner.sol";
 

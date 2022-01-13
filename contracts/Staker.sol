@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity 0.7.6;
+pragma solidity ^0.8.8;
+pragma abicoder v2;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 /**
   @title An asset staking contract.
@@ -54,7 +55,8 @@ contract Staker is Ownable, ReentrancyGuard {
     uint256 rate;
   }
 
-  /// Array of emission schedule timestamps for finding emission rate changes.
+  /** @notice Array of emission schedule timestamps for finding emission rate changes.
+  */
   uint256 public tokenEmissionEventsCount;
   mapping (uint256 => EmissionPoint) public tokenEmissionEvents;
   uint256 public pointEmissionEventsCount;

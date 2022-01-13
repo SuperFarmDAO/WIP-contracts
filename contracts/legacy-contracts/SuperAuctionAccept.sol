@@ -1,9 +1,10 @@
 /// SPDX-License-Identifier: GPL-3.0
-pragma solidity 0.7.6;
+pragma solidity ^0.8.8;
 
+// TO_ASK update version of solidity 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 import "./Fee1155NFTLockable.sol";
 
@@ -105,7 +106,7 @@ contract SuperAuctionAccept is Ownable, ReentrancyGuard {
   */
   function bid() public payable nonReentrant {
     require(block.timestamp <= auctionEndTime, "Auction already ended.");
-    require(msg.value > highestBid, "There already is a higher bid.");
+    require(msg.value > highestBid, "There already is a higher bid.");            // CHECK may be error 
     require(msg.value >= minimumBid, "Minimum bid amount not met.");
 
     // Extend the auction if a bid comes in within the ending buffer.
@@ -148,7 +149,7 @@ contract SuperAuctionAccept is Ownable, ReentrancyGuard {
     uint256 itemId = shiftedGroupId.add(1);
     itemIds[0] = itemId;
     amounts[0] = 1;
-    item.createNFT(highestBidder, itemIds, amounts, "");
+    item.createNFT(highestBidder, itemIds, amounts, "");    // TODO events for already minted NFT 
 
     // The auction ended in a sale.
     emit AuctionEnded(highestBidder, highestBid, block.timestamp, true);

@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.6.12;
+pragma solidity ^0.8.8;
 pragma experimental ABIEncoderV2;
 
-import "@openzeppelin/contracts/token/ERC1155/ERC1155Holder.sol";
+import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
-import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 import "./FeeOwner.sol";
 import "./Fee1155NFTLockable.sol";
@@ -28,7 +28,7 @@ contract ShopPlatformLaunchpad1155 is ERC1155Holder, Ownable, ReentrancyGuard {
   uint256 public version = 3;
 
   /// @dev A mask for isolating an item's group ID.
-  uint256 constant GROUP_MASK = uint256(uint128(~0)) << 128;
+  uint256 constant GROUP_MASK = type(uint128).max << 128;
 
   /// A user-specified Fee1155 contract to support selling items from.
   Fee1155NFTLockable public item;
