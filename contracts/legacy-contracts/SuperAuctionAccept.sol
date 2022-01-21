@@ -89,7 +89,7 @@ contract SuperAuctionAccept is Ownable, ReentrancyGuard {
     @param _receiptBuffer The buffer time which the auction owner has to accept.
     @param _minimumBid The lowest starting bid for the auctioned item.
   */
-  constructor(address payable _beneficiary, Fee1155NFTLockable _item, uint256 _groupId, uint256 _duration, uint256 _bidBuffer, uint256 _receiptBuffer, uint256 _minimumBid) public {
+  constructor(address payable _beneficiary, Fee1155NFTLockable _item, uint256 _groupId, uint256 _duration, uint256 _bidBuffer, uint256 _receiptBuffer, uint256 _minimumBid) {
     beneficiary = _beneficiary;
     originalOwner = _item.owner();
     item = _item;

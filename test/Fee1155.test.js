@@ -1,9 +1,8 @@
 'use strict';
 
 // Imports.
-import { ethers } from 'hardhat';
-import { expect } from 'chai';
-import 'chai/register-should';
+const { ethers } = require('hardhat');
+const { expect } = require('chai');
 
 // Test the SuperFarm ERC-1155 implementation.
 describe('Fee1155', function () {

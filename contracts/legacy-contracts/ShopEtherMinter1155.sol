@@ -48,7 +48,7 @@ contract ShopEtherMinter1155 is ERC1155Holder, Ownable, ReentrancyGuard {
     @param _item The address of the Fee1155 item that will be minting sales.
     @param _feeOwner The address of the FeeOwner due a portion of Shop earnings.
   */
-  constructor(Fee1155 _item, FeeOwner _feeOwner) public {
+  constructor(Fee1155 _item, FeeOwner _feeOwner) {
     item = _item;
     feeOwner = _feeOwner;
   }

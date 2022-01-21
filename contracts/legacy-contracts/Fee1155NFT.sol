@@ -63,7 +63,7 @@ contract Fee1155NFT is ERC1155, Ownable {
     @param _feeOwner The address of a FeeOwner who receives earnings from this
                      item.
   */
-  constructor(string memory _uri, FeeOwner _feeOwner, address _proxyRegistryAddress) public ERC1155(_uri) {
+  constructor(string memory _uri, FeeOwner _feeOwner, address _proxyRegistryAddress) ERC1155(_uri) {
     metadataUri = _uri;
     feeOwner = _feeOwner;
     proxyRegistryAddress = _proxyRegistryAddress;

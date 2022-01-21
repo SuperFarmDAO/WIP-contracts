@@ -32,7 +32,7 @@ contract FarmShopRecords is Ownable, ReentrancyGuard {
 
     @param _feeOwner The address of the FeeOwner due a portion of all Shop earnings.
   */
-  constructor(FeeOwner _feeOwner) public {
+  constructor(FeeOwner _feeOwner) {
     platformFeeOwner = _feeOwner;
   }
 

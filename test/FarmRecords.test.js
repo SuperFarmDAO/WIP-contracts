@@ -1,8 +1,8 @@
 'use strict';
 
 // Imports.
-import { ethers } from 'hardhat';
-import 'chai/register-should';
+const { ethers } = require('hardhat');
+const { expect } = require("chai");
 
 // Test the FarmRecords contract's ability to function as a proper registry.
 describe('FarmRecords', function () {

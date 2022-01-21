@@ -35,7 +35,7 @@ contract SuperVestCliff {
     mapping(address => uint256[]) private _ownerClaims;
     mapping(address => uint256[]) private _beneficiaryClaims;
 
-    constructor(address _tokenAddress) public {
+    constructor(address _tokenAddress) {
         tokenAddress = _tokenAddress;
     }
 

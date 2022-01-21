@@ -88,7 +88,7 @@ contract Shop1155 is ERC1155Holder, Ownable, ReentrancyGuard {
     @param _feeOwner The address of the FeeOwner due a portion of Shop earnings.
     @param _stakers The addresses of any Stakers to permit spending points from.
   */
-  constructor(string memory _name, FeeOwner _feeOwner, Staker[] memory _stakers) public {
+  constructor(string memory _name, FeeOwner _feeOwner, Staker[] memory _stakers) {
     name = _name;
     feeOwner = _feeOwner;
     stakers = _stakers;

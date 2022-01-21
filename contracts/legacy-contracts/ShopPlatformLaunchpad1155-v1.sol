@@ -183,7 +183,7 @@ contract ShopPlatformLaunchpad1155 is ERC1155Holder, Ownable, ReentrancyGuard {
     @param _stakers The addresses of any Stakers to permit spending points from.
     @param _purchaseLimit A limit on the number of items that a single address may purchase.
   */
-  constructor(Fee1155NFTLockable _item, FeeOwner _feeOwner, Staker[] memory _stakers, uint256 _purchaseLimit) public {
+  constructor(Fee1155NFTLockable _item, FeeOwner _feeOwner, Staker[] memory _stakers, uint256 _purchaseLimit) {
     item = _item;
     feeOwner = _feeOwner;
     stakers = _stakers;
@@ -276,14 +276,12 @@ contract ShopPlatformLaunchpad1155 is ERC1155Holder, Ownable, ReentrancyGuard {
 
     // Immediately store some given information about this pool.
     uint256 newPoolVersion = pools[poolId].currentPoolVersion.add(1);
-    pools[poolId] = Pool({
-      name: pool.name,
-      startBlock: pool.startBlock,
-      endBlock: pool.endBlock,
-      itemGroups: _groupIds,
-      currentPoolVersion: newPoolVersion,
-      requirement: pool.requirement
-    });
+    pools[poolId].name = pool.name;
+    pools[poolId].startBlock = pool.startBlock;
+    pools[poolId].endBlock = pool.endBlock;
+    pools[poolId].itemGroups = _groupIds;
+    pools[poolId].currentPoolVersion = newPoolVersion;
+    pools[poolId].requirement = pool.requirement;
 
     // Store the amount of each item group that this pool may mint.
     for (uint256 i = 0; i < _groupIds.length; i++) {
@@ -352,7 +350,7 @@ contract ShopPlatformLaunchpad1155 is ERC1155Holder, Ownable, ReentrancyGuard {
     // This involves converting the asset from an address to a Staker index.
     PricePair memory sellingPair = pools[poolId].itemPrices[itemKey][assetId];
     if (sellingPair.assetType == 0) {
-      uint256 stakerIndex = uint256(sellingPair.asset);
+      uint256 stakerIndex = uint256(uint160(sellingPair.asset));
       stakers[stakerIndex].spendPoints(msg.sender, sellingPair.price.mul(amount));
 
     // If the sentinel value for the Ether asset type is found, sell for Ether.

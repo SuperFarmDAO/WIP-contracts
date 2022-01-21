@@ -32,7 +32,7 @@ contract FarmItemRecords is Ownable, ReentrancyGuard {
 
     @param _proxyRegistryAddress An OpenSea proxy registry address.
   */
-  constructor(address _proxyRegistryAddress) public {
+  constructor(address _proxyRegistryAddress) {
     proxyRegistryAddress = _proxyRegistryAddress;
   }
 

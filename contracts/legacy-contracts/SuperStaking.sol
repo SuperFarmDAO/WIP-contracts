@@ -35,6 +35,7 @@ contract SuperStaking is ISuperStaking, Ownable, ReentrancyGuard {
     ) {
         rewardsToken = IERC20(_rewardsToken);
         stakingToken = IERC20(_stakingToken);
+        transferOwnership(_owner);
     }
 
     function balanceOf(address account) external override view returns (uint256) {

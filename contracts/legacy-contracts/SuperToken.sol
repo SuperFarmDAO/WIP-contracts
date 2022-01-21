@@ -11,16 +11,17 @@ pragma solidity ^0.8.8;
  *
  * This contract is only required for intermediate, library-like contracts.
  */
-contract Context {
+abstract contract Context {
     // Empty internal constructor, to prevent people from mistakenly deploying
     // an instance of this contract, which should be used via inheritance.
-    constructor() internal {}
+    constructor() {}
 
     // solhint-disable-previous-line no-empty-blocks
 
-    function _msgSender() internal view returns (address payable) {
-        return msg.sender;
-    }
+    // CHECK
+    // function _msgSender() internal view returns (address payable) {
+    //     return msg.sender;
+    // }
 
     function _msgData() internal view returns (bytes memory) {
         this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691
@@ -343,7 +344,7 @@ contract ERC20 is Context, IERC20 {
         override
         returns (bool)
     {
-        _transfer(_msgSender(), recipient, amount);
+        _transfer(msg.sender, recipient, amount);
         return true;
     }
 
@@ -371,7 +372,7 @@ contract ERC20 is Context, IERC20 {
         override
         returns (bool)
     {
-        _approve(_msgSender(), spender, amount);
+        _approve(msg.sender, spender, amount);
         return true;
     }
 
@@ -395,8 +396,8 @@ contract ERC20 is Context, IERC20 {
         _transfer(sender, recipient, amount);
         _approve(
             sender,
-            _msgSender(),
-            _allowances[sender][_msgSender()].sub(
+            msg.sender,
+            _allowances[sender][msg.sender].sub(
                 amount,
                 "ERC20: transfer amount exceeds allowance"
             )
@@ -421,9 +422,9 @@ contract ERC20 is Context, IERC20 {
         returns (bool)
     {
         _approve(
-            _msgSender(),
+            msg.sender,
             spender,
-            _allowances[_msgSender()][spender].add(addedValue)
+            _allowances[msg.sender][spender].add(addedValue)
         );
         return true;
     }
@@ -447,9 +448,9 @@ contract ERC20 is Context, IERC20 {
         returns (bool)
     {
         _approve(
-            _msgSender(),
+            msg.sender,
             spender,
-            _allowances[_msgSender()][spender].sub(
+            _allowances[msg.sender][spender].sub(
                 subtractedValue,
                 "ERC20: decreased allowance below zero"
             )

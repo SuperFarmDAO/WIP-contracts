@@ -6,6 +6,7 @@ import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
+
 import "./FeeOwner.sol";
 
 /**
@@ -66,7 +67,7 @@ contract Fee1155NFTLockable is ERC1155, Ownable {
     @param _feeOwner The address of a FeeOwner who receives earnings from this
                      item.
   */
-  constructor(string memory _uri, FeeOwner _feeOwner, address _proxyRegistryAddress) public ERC1155(_uri) {
+  constructor(string memory _uri, FeeOwner _feeOwner, address _proxyRegistryAddress) ERC1155(_uri) {
     metadataUri = _uri;
     feeOwner = _feeOwner;
     proxyRegistryAddress = _proxyRegistryAddress;

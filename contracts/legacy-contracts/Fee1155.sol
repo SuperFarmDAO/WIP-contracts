@@ -83,7 +83,7 @@ contract Fee1155 is ERC1155, Ownable {
                      item.
     @param _proxyRegistryAddress An OpenSea proxy registry address.
   */
-  constructor(string memory _uri, FeeOwner _feeOwner, address _proxyRegistryAddress) public ERC1155(_uri) {
+  constructor(string memory _uri, FeeOwner _feeOwner, address _proxyRegistryAddress) ERC1155(_uri) {
     metadataUri = _uri;
     feeOwner = _feeOwner;
     proxyRegistryAddress = _proxyRegistryAddress;

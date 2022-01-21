@@ -1,9 +1,8 @@
 'use strict';
 
 // Imports.
-import { ethers } from 'hardhat';
-import { expect } from 'chai';
-import 'chai/register-should';
+const { ethers } = require( 'hardhat');
+const { expect } = require( 'chai');
 
 // Test the Shop contract's ability to list and sell NFTs.
 describe('ShopEtherMinter1155Curated', function () {

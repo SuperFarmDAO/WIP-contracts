@@ -1,9 +1,8 @@
 'use strict';
 
 // Imports.
-import { network, ethers } from 'hardhat';
-import { expect } from 'chai';
-import 'chai/register-should';
+const { network, ethers } = require( 'hardhat');
+const { expect } = require('chai');
 
 async function fastForward (amount) {
 	const currentBlock = await ethers.provider.getBlockNumber();

@@ -53,7 +53,7 @@ contract SuperNFTVestStream {
     mapping(address => uint256[]) private _ownerClaims;
     mapping(uint256 => uint256[]) private _nftClaims;
 
-    constructor(address _tokenAddress, address _nftAddress) public {
+    constructor(address _tokenAddress, address _nftAddress) {
         require(
             _tokenAddress.isContract(),
             "_tokenAddress must be a contract address"

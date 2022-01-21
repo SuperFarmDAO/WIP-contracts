@@ -307,7 +307,7 @@ contract ShopPlatformLaunchpad1155 is ERC1155Holder, Ownable, ReentrancyGuard {
     @param _globalPurchaseLimit A global limit on the number of items that a
       single address may purchase across all pools in the launchpad.
   */
-  constructor(Fee1155NFTLockable _item, FeeOwner _feeOwner, Staker[] memory _stakers, uint256 _globalPurchaseLimit) public {
+  constructor(Fee1155NFTLockable _item, FeeOwner _feeOwner, Staker[] memory _stakers, uint256 _globalPurchaseLimit) {
     item = _item;
     feeOwner = _feeOwner;
     stakers = _stakers;
@@ -513,15 +513,14 @@ contract ShopPlatformLaunchpad1155 is ERC1155Holder, Ownable, ReentrancyGuard {
 
     // Immediately store some given information about this pool.
     uint256 newPoolVersion = pools[poolId].currentPoolVersion.add(1);
-    pools[poolId] = Pool({
-      name: pool.name,
-      startBlock: pool.startBlock,
-      endBlock: pool.endBlock,
-      purchaseLimit: pool.purchaseLimit,
-      itemGroups: _groupIds,
-      currentPoolVersion: newPoolVersion,
-      requirement: pool.requirement
-    });
+    pools[poolId].name = pool.name;
+    pools[poolId].startBlock = pool.startBlock;
+    pools[poolId].endBlock = pool.endBlock;
+    pools[poolId].purchaseLimit = pool.purchaseLimit;
+    pools[poolId].itemGroups = _groupIds;
+    pools[poolId].currentPoolVersion = newPoolVersion;
+    pools[poolId].requirement = pool.requirement;
+    
 
     // Store the amount of each item group that this pool may mint.
     for (uint256 i = 0; i < _groupIds.length; i++) {
@@ -566,11 +565,9 @@ contract ShopPlatformLaunchpad1155 is ERC1155Holder, Ownable, ReentrancyGuard {
     uint256 newWhitelistVersion = whitelists[whitelistId].currentWhitelistVersion.add(1);
 
     // Immediately store some given information about this whitelist.
-    whitelists[whitelistId] = Whitelist({
-      expiryBlock: whitelist.expiryBlock,
-      isActive: whitelist.isActive,
-      currentWhitelistVersion: newWhitelistVersion
-    });
+    whitelists[whitelistId].expiryBlock = whitelist.expiryBlock;
+    whitelists[whitelistId].isActive = whitelist.isActive;
+    whitelists[whitelistId].currentWhitelistVersion = newWhitelistVersion;
 
     // Invalidate the old mapping and store the new participation flags.
     for (uint256 i = 0; i < whitelist.addresses.length; i++) {
@@ -717,7 +714,7 @@ contract ShopPlatformLaunchpad1155 is ERC1155Holder, Ownable, ReentrancyGuard {
     // This involves converting the asset from an address to a Staker index.
     PricePair memory sellingPair = pools[poolId].itemPrices[itemKey][assetId];
     if (sellingPair.assetType == 0) {
-      uint256 stakerIndex = uint256(sellingPair.asset);
+      uint256 stakerIndex = uint256(uint160(sellingPair.asset));
       stakers[stakerIndex].spendPoints(msg.sender, sellingPair.price.mul(amount));
 
     // If the sentinel value for the Ether asset type is found, sell for Ether.

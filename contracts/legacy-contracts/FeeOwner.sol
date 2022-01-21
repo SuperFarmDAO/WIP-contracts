@@ -30,7 +30,7 @@ contract FeeOwner is Ownable {
     @param _fee The percent fee to apply, represented as 1/1000th of a percent.
     @param _maximumFee The maximum possible fee that the owner can set.
   */
-  constructor(uint256 _fee, uint256 _maximumFee) public {
+  constructor(uint256 _fee, uint256 _maximumFee) {
     require(_fee <= _maximumFee, "The fee cannot be set above its maximum.");
     fee = _fee;
     maximumFee = _maximumFee;
